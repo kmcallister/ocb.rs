@@ -1,0 +1,12 @@
+env:
+  global:
+    - secure: gwATuDa9s0jwnlNgyAlPn8YD4rpePHfx+Og+a/0BQ6oYL/reoaM8mf1mtUFCYepe5cqoEQ4KBdyrwgPClH74oqHqQkOSujhvVIhCvdDf66dYGwCQO+Tkk9LHeLW+DVqPbCtyj3zvV0NpdffkIH5slGSgpedbeVIYJ2mjcP+5Owo=
+language: rust
+before_script:
+  - sudo apt-get install libssl-dev
+script:
+  - cargo test
+  - cargo doc
+after_script:
+  - cd target
+  - curl http://www.rust-ci.org/artifacts/put?t=$RUSTCI_TOKEN | sh
