@@ -6,7 +6,7 @@ extern crate libc;
 
 use std::default::Default;
 use std::borrow::ToOwned;
-use std::io::{File, Command};
+use std::old_io::{File, Command};
 use std::os;
 use std::str;
 use libc::c_int;
