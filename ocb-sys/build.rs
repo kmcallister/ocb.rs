@@ -25,10 +25,11 @@ fn main() {
     // runs and gives the wrong answer, there's a run-time check
     // as well.
     Command::new("gcc")
-        .args(&["-Wall", "-Werror", "-lcrypto"])
+        .args(&["-Wall", "-Werror"])
         .arg("-o").arg(&out[])
         .arg("print_ae_ctx_sizeof.c")
         .arg(format!("{}/libocb.a", out_dir))
+        .arg("-lcrypto")
         .status().unwrap();
 
     let output = Command::new(&out[]).output().unwrap();
