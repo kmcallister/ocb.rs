@@ -1,5 +1,7 @@
 # OCB-AES authenticryption for Rust
 
+[![Build Status](https://travis-ci.org/kmcallister/ocb.rs.svg?branch=master)](https://travis-ci.org/kmcallister/ocb.rs)
+
 This library implements the [OCB mode][] for authenticated encryption with
 associated data (AEAD), described in [RFC 7253][].  It uses OCB on top of
 [AES][]-128.  It includes and builds the [optimized C implementation][] of OCB
