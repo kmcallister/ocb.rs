@@ -1,5 +1,5 @@
+#![feature(rustc_private, core)]
 #![deny(warnings)]
-#![allow(unstable)]
 
 extern crate serialize;
 extern crate ocb;

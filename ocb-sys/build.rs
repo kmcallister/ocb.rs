@@ -1,5 +1,5 @@
+#![feature(libc, os, core, io, collections, path)]
 #![deny(warnings)]
-#![allow(unstable)]
 
 extern crate gcc;
 extern crate libc;

@@ -1,5 +1,5 @@
+#![feature(libc, hash, core)]
 #![deny(warnings)]
-#![allow(unstable)]
 
 extern crate "ocb-sys" as ocb_sys;
 extern crate libc;

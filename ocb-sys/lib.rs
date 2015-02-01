@@ -1,5 +1,5 @@
+#![feature(libc)]
 #![deny(warnings)]
-#![allow(unstable)]
 
 /// See `ocb/ae.h` for documentation.
 
