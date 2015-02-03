@@ -1,9 +1,8 @@
+sudo: false
 env:
   global:
     - secure: 1+nCb/tG/1dyE0AkNHHUAv6frjTbqtZpXOw2rCZRv+e78jhoQ1jBty7ma0+4wIu4HGXwP3aJZfyEBBcO4epXFfGno4Z8kqtUtXHnHy/f52U9m0xmuhwhA2ZIdl1lCtxVeYba8QJO04GCxkEbp5p3A0ihfzC/0S6m2CSuGgYG/Lk=
 language: rust
-before_script:
-  - sudo apt-get install libssl-dev
 script:
   - cargo test
   - cargo doc
