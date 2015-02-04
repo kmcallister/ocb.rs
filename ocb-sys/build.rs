@@ -1,4 +1,4 @@
-#![feature(libc, os, core, io, collections, path)]
+#![feature(libc, os, core, io, path)]
 #![deny(warnings)]
 
 extern crate gcc;
