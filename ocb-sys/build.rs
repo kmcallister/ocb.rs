@@ -1,4 +1,4 @@
-#![feature(libc, os, core, io, path)]
+#![feature(libc, env, core, io, path)]
 #![deny(warnings)]
 
 extern crate gcc;
@@ -7,12 +7,12 @@ extern crate libc;
 use std::default::Default;
 use std::borrow::ToOwned;
 use std::old_io::{File, Command};
-use std::os;
+use std::env;
 use std::str;
 use libc::c_int;
 
 fn main() {
-    let out_dir = os::getenv("OUT_DIR").unwrap();
+    let out_dir = env::var_string("OUT_DIR").unwrap();
 
     gcc::compile_library("libocb.a", &gcc::Config {
         flags: vec!["-O3".to_owned(), "-fPIC".to_owned()],
