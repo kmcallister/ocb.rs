@@ -1,23 +1,21 @@
-#![feature(libc, env, core, io, path)]
+#![feature(libc, env, io, path)]
 #![deny(warnings)]
 
 extern crate gcc;
 extern crate libc;
 
-use std::default::Default;
-use std::borrow::ToOwned;
 use std::old_io::{File, Command};
 use std::env;
 use std::str;
 use libc::c_int;
 
 fn main() {
-    let out_dir = env::var_string("OUT_DIR").unwrap();
+    let out_dir = env::var("OUT_DIR").unwrap();
 
-    gcc::compile_library("libocb.a", &gcc::Config {
-        flags: vec!["-O3".to_owned(), "-fPIC".to_owned()],
-        ..Default::default()
-    }, &["ocb.c"]);
+    gcc::Config::new()
+        .file("ocb.c")
+        .flag("-O3").flag("-fPIC")
+        .compile("libocb.a");
 
     let out = format!("{}/print_ae_ctx_sizeof", out_dir);
 

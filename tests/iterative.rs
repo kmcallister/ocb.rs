@@ -1,4 +1,3 @@
-#![feature(core)]
 #![deny(warnings)]
 
 extern crate ocb;
