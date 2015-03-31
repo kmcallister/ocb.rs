@@ -28,13 +28,13 @@ fn iterative() {
     for i in 0..128us {
         // NB: plaintext and associated data are swapped in the spec's OCB-ENCRYPT
         let s: Vec<u8> = iter::repeat(0).take(i).collect();
-        ct.extend(enc!(3*i+1, &s[], &s[]).into_iter());
-        ct.extend(enc!(3*i+2, &s[], &[]).into_iter());
-        ct.extend(enc!(3*i+3, &[], &s[]).into_iter());
+        ct.extend(enc!(3*i+1, &s, &s).into_iter());
+        ct.extend(enc!(3*i+2, &s, &[]).into_iter());
+        ct.extend(enc!(3*i+3, &[], &s).into_iter());
     }
 
-    let result = enc!(385, &[], &ct[]);
-    assert_eq!(&result[],
+    let result = enc!(385, &[], &ct);
+    assert_eq!(&*result,
         [0x67, 0xE9, 0x44, 0xD2, 0x32, 0x56, 0xC5, 0xE0,
          0xB6, 0xC6, 0x1F, 0xA2, 0x2F, 0xDF, 0x1E, 0xA2]);
 }

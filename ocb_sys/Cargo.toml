@@ -1,11 +1,11 @@
 [package]
-name = "ocb-sys"
+name = "ocb_sys"
 version = "0.0.1"
 authors = []
 build = "build.rs"
 
 [lib]
-name = "ocb-sys"
+name = "ocb_sys"
 path = "lib.rs"
 
 [build-dependencies]

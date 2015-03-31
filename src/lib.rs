@@ -1,7 +1,7 @@
-#![feature(libc, hash, core)]
+#![feature(libc, core)]
 #![deny(warnings)]
 
-extern crate "ocb-sys" as ocb_sys;
+extern crate ocb_sys;
 extern crate libc;
 
 use std::{result, mem, fmt, ptr, simd};
@@ -107,7 +107,7 @@ impl Iterator for Counter {
     fn next(&mut self) -> Option<Nonce> {
         let v = self.0;
         for i in 0..NONCE_LEN {
-            self.0[i] += 1;
+            self.0[i] = self.0[i].wrapping_add(1);
             if self.0[i] != 0 {
                 break;
             }
@@ -247,20 +247,20 @@ mod test {
         let (nonce, mut ct) = ctx.encrypt(&mut counter, msg, assoc).unwrap();
         assert_eq!(nonce.0, [0; NONCE_LEN]);
 
-        let pt = ctx.decrypt(nonce.clone(), &ct[], assoc).unwrap();
-        assert_eq!(&pt[], msg);
+        let pt = ctx.decrypt(nonce.clone(), &ct, assoc).unwrap();
+        assert_eq!(&*pt, msg);
 
-        assert_eq!(ctx.decrypt(nonce.clone(), &ct[], "bogus".as_bytes()),
+        assert_eq!(ctx.decrypt(nonce.clone(), &ct, "bogus".as_bytes()),
             Err(Error::InvalidTag));
 
         ct[0] ^= 0x01;
-        assert_eq!(ctx.decrypt(nonce.clone(), &ct[], assoc),
+        assert_eq!(ctx.decrypt(nonce.clone(), &ct, assoc),
             Err(Error::InvalidTag));
         ct[0] ^= 0x01;
-        assert!(ctx.decrypt(nonce.clone(), &ct[], assoc).is_ok());
+        assert!(ctx.decrypt(nonce.clone(), &ct, assoc).is_ok());
 
         let mut ctx2 = Context::new(Key([5; KEY_LEN])).unwrap();
-        assert_eq!(ctx2.decrypt(nonce, &ct[], assoc),
+        assert_eq!(ctx2.decrypt(nonce, &ct, assoc),
             Err(Error::InvalidTag));
     }
 }

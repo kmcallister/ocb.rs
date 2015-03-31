@@ -1,4 +1,4 @@
-#![feature(rustc_private, core)]
+#![feature(rustc_private)]
 #![deny(warnings)]
 
 extern crate serialize;
@@ -11,7 +11,7 @@ unsafe fn from_hex<T>(x: &str) -> T {
     let mut out: T = mem::uninitialized();
     let y = x.from_hex().unwrap();
     assert_eq!(y.len(), mem::size_of::<T>());
-    ptr::copy_nonoverlapping_memory(&mut out,
+    ptr::copy_nonoverlapping(&mut out,
         y.as_ptr() as *const T, 1);
     out
 }
@@ -25,9 +25,9 @@ macro_rules! test_vector {
         let ct = $ct.from_hex().unwrap();
 
         assert_eq!(ct, ctx.encrypt(&mut Some(nonce.clone()).into_iter(),
-            &pt[], &assoc[]).unwrap().1);
+            &pt, &assoc).unwrap().1);
 
-        assert_eq!(pt, ctx.decrypt(nonce, &ct[], &assoc[]).unwrap());
+        assert_eq!(pt, ctx.decrypt(nonce, &ct, &assoc).unwrap());
     }}
 }
 
