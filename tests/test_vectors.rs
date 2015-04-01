@@ -11,8 +11,7 @@ unsafe fn from_hex<T>(x: &str) -> T {
     let mut out: T = mem::uninitialized();
     let y = x.from_hex().unwrap();
     assert_eq!(y.len(), mem::size_of::<T>());
-    ptr::copy_nonoverlapping(&mut out,
-        y.as_ptr() as *const T, 1);
+    ptr::copy_nonoverlapping(y.as_ptr() as *const T, &mut out, 1);
     out
 }
 
