@@ -8,6 +8,8 @@ associated data (AEAD), described in [RFC 7253][].  It uses OCB on top of
 by Ted Krovetz, with a safe Rust API on top.  This library uses OpenSSL for the
 AES block primitive.
 
+See the [API documentation](https://kmcallister.github.io/docs/ocb.rs) for more.
+
 Phillip Rogaway holds patents relevant to OCB.  Please read the [patent grant
 for open-source or non-military software](http://web.cs.ucdavis.edu/~rogaway/ocb/grant.htm).
 
